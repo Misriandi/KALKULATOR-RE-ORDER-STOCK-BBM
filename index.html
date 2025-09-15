@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Re-order Stok</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 400px;
+      margin: auto;
+    }
+    input, button {
+      padding: 10px;
+      margin: 8px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .hasil {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Kalkulator Re-order Stok</h2>
+
+<label>Sisa Stok Hari Ini (Ltr):</label>
+<input type="number" id="sisaStok" placeholder="Contoh: 1000">
+
+<label>Stok Minimal (Ltr):</label>
+<input type="number" id="stokMin" placeholder="Contoh: 100">
+
+<label>Rata-rata Penjualan per Hari (Ltr):</label>
+<input type="number" id="rataJual" placeholder="Contoh: 100">
+
+<button onclick="hitungReorder()">Hitung</button>
+
+<div class="hasil" id="output"></div>
+
+<script>
+function hitungReorder() {
+  const sisa = parseFloat(document.getElementById('sisaStok').value);
+  const min = parseFloat(document.getElementById('stokMin').value);
+  const jual = parseFloat(document.getElementById('rataJual').value);
+
+  if (isNaN(sisa)  isNaN(min)  isNaN(jual) || jual <= 0) {
+    document.getElementById('output').innerHTML = "<strong>Masukkan angka yang valid!</strong>";
+    return;
+  }
+
+  const ketahanan = Math.floor((sisa - min) / jual);
+  const hariIni = new Date();
+  const reorderDate = new Date(hariIni.getTime() + (ketahanan * 24 * 60 * 60 * 1000));
+
+  const status = ketahanan <= 3 ? "❌ Perlu Re-order segera!" : "✅ Stok Aman";
+
+  document.getElementById('output').innerHTML = `
+    <strong>Hasil Perhitungan:</strong><br>
+    Ketahanan Stok: <strong>${ketahanan} hari</strong><br>
+    Tanggal Re-order: <strong>${reorderDate.toLocaleDateString('id-ID')}</strong><br>
+    Status: <strong>${status}</strong>
+  `;
+}
+</script>
+
+</body>
+</html>
