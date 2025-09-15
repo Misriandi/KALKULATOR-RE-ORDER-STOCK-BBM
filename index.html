@@ -56,7 +56,7 @@ function hitungReorder() {
   const min = parseFloat(document.getElementById('stokMin').value);
   const jual = parseFloat(document.getElementById('rataJual').value);
 
-  if (isNaN(sisa)  isNaN(min)  isNaN(jual) || jual <= 0) {
+  if (isNaN(sisa) || isNaN(min) || isNaN(jual) || jual <= 0) {
     document.getElementById('output').innerHTML = "<strong>Masukkan angka yang valid!</strong>";
     return;
   }
