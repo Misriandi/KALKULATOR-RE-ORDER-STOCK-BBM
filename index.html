@@ -69,7 +69,7 @@
       const ketahanan = Math.floor((sisa - min) / jual);
       const hariIni = new Date();
       const reorderDate = new Date(hariIni.getTime() + (ketahanan * 24 * 60 * 60 * 1000));
-      const status = ketahanan <= 3 ? "❌ Perlu Re-order segera!" : "✅ Stok Aman";
+      const status = ketahanan <= 3 ? "❌ Hubungi Bagian Penebusan BBM!" : "✅ Stok Aman";
       document.getElementById('output').innerHTML = `
     <strong>Hasil Perhitungan:</strong><br>
     Ketahanan Stok: <strong>${ketahanan} hari</strong><br>
